@@ -30,6 +30,16 @@ dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-actuator")
 	testImplementation("org.mockito.kotlin:mockito-kotlin:3.2.0")
 	testImplementation("com.nhaarman.mockitokotlin2:mockito-kotlin:2.2.0")
+
+	implementation("org.springframework.boot:spring-boot-starter-webflux")
+	implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.2")
+	implementation("org.jetbrains.kotlinx:kotlinx-coroutines-reactor:1.5.2")
+
+	implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.3.0")
+
+	implementation("org.springframework.cloud:spring-cloud-starter-openfeign:4.1.0")
+
+	implementation("javax.servlet:javax.servlet-api:4.0.1")
 }
 
 tasks.withType<KotlinCompile> {
