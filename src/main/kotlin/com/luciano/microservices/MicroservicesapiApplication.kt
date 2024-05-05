@@ -10,5 +10,6 @@ class MicroservicesapiApplication
 
 fun main(args: Array<String>) {
 	runApplication<MicroservicesapiApplication>(*args)
+	println("Força subida")
 }
 
