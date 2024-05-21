@@ -1,6 +1,5 @@
 package com.luciano.microservices.service.feingclient
 
-import com.luciano.microservices.controller.dto.RickMorthResponse
 import com.luciano.microservices.model.RickAndMorth
 import com.luciano.microservices.repository.RickAndMorthRepository
 import org.springframework.stereotype.Service
@@ -13,18 +12,30 @@ class CharacterFeingClientService(
 ) {
     @Transactional
     fun savePersonCharacter(page: Int?) {
-        val response = getFeing(page)
+        val response = feingClient.getCharacterAll(page ?: 1)
         val rickAndMorth = response.results.map { it.toEntity() }
-        rickAndMorthRepository.saveAll(rickAndMorth)
+        if (page != null && rickAndMorth != null) {
+            rickAndMorthRepository.saveAll(rickAndMorth)
+        } else {
+            throw Exception("Os campos estão vazios")
+        }
+
     }
+
     fun getCharacterAll(): List<RickAndMorth> {
-        return rickAndMorthRepository.findAll()
-    }
-    fun getByIdPerson(idPerson: Long): RickAndMorth {
-       return rickAndMorthRepository.findById(idPerson).orElseThrow {
-           Exception("Esse id não existe!")
+        val listCharacter = rickAndMorthRepository.findAll()
+        if (listCharacter.isNotEmpty()) {
+            return listCharacter
+        } else {
+            throw Exception("Essa lista está vazia!")
         }
     }
-    private fun getFeing(page: Int?): RickMorthResponse = feingClient.getCharacterAll(page?:1)
+
+    fun getByIdPerson(idPerson: Long): RickAndMorth {
+        return rickAndMorthRepository.findById(idPerson).orElseThrow {
+            RuntimeException("Esse id não existe!")
+        }
+    }
+    //private fun getCharacterAllPerson(page: Int?): RickMorthResponse = feingClient.getCharacterAll(page?:1)
 
 }

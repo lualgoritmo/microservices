@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.ResponseStatus
 
-@FeignClient(name = "users-character", url ="\${api_rickMorth_uri}")
+@FeignClient(name = "users-character", url ="\${api_rickMorth_uri:https://rickandmortyapi.com}")
 interface RickAndMorthFeingClient {
     @GetMapping("/api/character", consumes = [MediaType.APPLICATION_JSON_VALUE])
     @ResponseStatus(HttpStatus.OK)
