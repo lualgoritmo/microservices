@@ -37,10 +37,11 @@ class CharacterFeingClientServiceTest {
 
     @Test
     fun `When searching for characters you must save them`() {
+        val result = listRickAndMorthDTO()
+        val list = RickMorthResponse(result)
+        val response = listRickAndMorthDTO()
 
-        val response = RickMorthResponse(listRickAndMorthDTO())
-
-        `when`(feingClient.getCharacterAll(page = 1)).thenReturn(response)
+        `when`(feingClient.getCharacterAll(page = 1)).thenReturn(list)
 
         feingClientService.savePersonCharacter(page = 1)
 

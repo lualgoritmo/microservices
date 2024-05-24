@@ -38,9 +38,10 @@ data class RickAndMorthDTO(
     }
     fun toEntity() = RickAndMorth(
         id = null,
-        name = this.name,
-        status = this.status,
-        species = this.species,
-        type = this.type,
-        gender =this.gender)
+        name = name,
+        status = status,
+        species = species,
+        type = type,
+        gender = gender
+    )
 }

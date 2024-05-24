@@ -12,8 +12,13 @@ class SavePersonFeingController(
 ) {
     @PostMapping("/fetchAndSave")
     @ResponseStatus(HttpStatus.CREATED)
-    fun saveCharacter(@RequestParam("page", required = false)page:Int?) =
-        characterService.savePersonCharacter(page)
+    fun saveCharacter(@RequestParam("page", required = false) page: Int?) {
+         characterService.savePersonCharacter(page).map {
+            RickAndMorthDTO.fromEntity(it)
+        }
+
+    }
+
     @GetMapping("/{idPerson}")
     @ResponseStatus(HttpStatus.OK)
     fun getByIdPerson(@PathVariable idPerson: Long): RickAndMorthDTO {
@@ -21,6 +26,7 @@ class SavePersonFeingController(
         return RickAndMorthDTO.fromEntity(person)
 
     }
+
     @GetMapping("/all")
     @ResponseStatus(HttpStatus.OK)
     fun getAllCharacters(): List<RickAndMorthDTO> {

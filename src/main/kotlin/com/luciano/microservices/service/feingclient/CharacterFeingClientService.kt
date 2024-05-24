@@ -11,11 +11,11 @@ class CharacterFeingClientService(
     private val rickAndMorthRepository: RickAndMorthRepository
 ) {
     @Transactional
-    fun savePersonCharacter(page: Int?) {
+    fun savePersonCharacter(page: Int?):List<RickAndMorth> {
         val response = feingClient.getCharacterAll(page ?: 1)
         val rickAndMorth = response.results.map { it.toEntity() }
         if (page != null && rickAndMorth != null) {
-            rickAndMorthRepository.saveAll(rickAndMorth)
+          return rickAndMorthRepository.saveAll(rickAndMorth)
         } else {
             throw Exception("Os campos estão vazios")
         }
